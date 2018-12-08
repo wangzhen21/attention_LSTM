@@ -199,13 +199,15 @@ class Task4Loader:
                                   self.y_one_hot)
         return training, testing
 
-    def load_stance_brexit_5cross(self, file):
-        '''
 
+    def load_stance_brexit_5cross(self, file,cross):
+        '''
         :param file: file is a str, all the sentences, include cross info
         :return:
         '''
         revs = []
+        X = []
+        y = []
         with open(file, "r") as f:
             for line in f:
                 rev = []
@@ -213,8 +215,9 @@ class Task4Loader:
                 orig_rev = line.strip()
                 thisstance = int(line[0])
                 orig_rev = orig_rev[1:len(orig_rev)].strip()
+                oppinion = get_oppinion(orig_rev[0:len(orig_rev)-4])
                 X.append(orig_rev)
-                y.append(i)
+                y.append(oppinion)
         X_train, X_test, y_train, y_test = train_test_split(X, y,
                                                             test_size=0.1,
                                                             stratify=y,
@@ -255,3 +258,19 @@ class Task4Loader:
         testing = prepare_dataset(X_test, y_test, self.pipeline,
                                   self.y_one_hot)
         return training, testing
+
+def get_oppinion(self, str):
+    line_split = (str.strip()).split()
+    if line_split[len(line_split) - 2].isalnum():
+        return int(line_split[len(line_split) - 2])
+    else:
+        print("no oppinion in sentence")
+        return 0
+
+def get_cross(self, str):
+    line_split = (str.strip()).split()
+    if line_split[len(line_split) - 1].isalnum():
+        return int(line_split[len(line_split) - 1])
+    else:
+        print("no oppinion in sentence")
+        return 0
