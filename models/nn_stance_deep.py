@@ -33,7 +33,7 @@ FINAL = True
 # in order to perform Post-mortem analysis
 SEMEVAL_GOLD = False
 
-max_length = 50
+max_length = 30
 TASK = "A"  # Specify the Subtask. It is needed to correctly load the data
 
 ############################################################################
