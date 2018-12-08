@@ -208,6 +208,10 @@ class Task4Loader:
         revs = []
         X = []
         y = []
+        X_train = []
+        X_test = []
+        y_train = []
+        y_test = []
         with open(file, "r") as f:
             for line in f:
                 rev = []
@@ -215,13 +219,15 @@ class Task4Loader:
                 orig_rev = line.strip()
                 thisstance = int(line[0])
                 orig_rev = orig_rev[1:len(orig_rev)].strip()
-                oppinion = get_oppinion(orig_rev[0:len(orig_rev)-4])
-                X.append(orig_rev)
-                y.append(oppinion)
-        X_train, X_test, y_train, y_test = train_test_split(X, y,
-                                                            test_size=0.1,
-                                                            stratify=y,
-                                                            random_state=27)
+                pure_orig = orig_rev[0:len(orig_rev)-4].strip()
+                oppinion = get_oppinion(orig_rev)
+                if get_cross(orig_rev) == cross:
+                    X_test.append(pure_orig)
+                    y_test.append(oppinion)
+                else:
+                    X_train.append(pure_orig)
+                    y_train.append(oppinion)
+
         print("\nPreparing training set...")
         training = prepare_dataset(X_train, y_train, self.pipeline,
                                    self.y_one_hot)
@@ -229,6 +235,7 @@ class Task4Loader:
         testing = prepare_dataset(X_test, y_test, self.pipeline,
                                   self.y_one_hot)
         return training, testing
+
     def load_stance_brexit(self,file_list):
         revs = []
         pos_file = file_list[0]
@@ -244,7 +251,6 @@ class Task4Loader:
                     rev.append(line.strip())
                     orig_rev = line.strip()
                     thisstance = int(line[0])
-                    orig_rev = orig_rev[1:len(orig_rev)].strip()
                     X.append(orig_rev)
                     y.append(i)
         X_train, X_test, y_train, y_test = train_test_split(X, y,
@@ -259,7 +265,7 @@ class Task4Loader:
                                   self.y_one_hot)
         return training, testing
 
-def get_oppinion(self, str):
+def get_oppinion(str):
     line_split = (str.strip()).split()
     if line_split[len(line_split) - 2].isalnum():
         return int(line_split[len(line_split) - 2])
@@ -267,7 +273,7 @@ def get_oppinion(self, str):
         print("no oppinion in sentence")
         return 0
 
-def get_cross(self, str):
+def get_cross(str):
     line_split = (str.strip()).split()
     if line_split[len(line_split) - 1].isalnum():
         return int(line_split[len(line_split) - 1])
