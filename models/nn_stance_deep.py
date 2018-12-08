@@ -60,7 +60,7 @@ if FINAL:
     #training, testing = loader.load_final()
     data_folder = ["../dataset/brexit/BrexitOpposite.txt", "../dataset/brexit/BrexitNeutral.txt", "../dataset/brexit/BrexitSupport.txt"]
     wholeFile = "../dataset/brexit/brexit5cross.txt"
-    training, testing = loader.load_stance_brexit_5cross(data_folder)
+    training, testing = loader.load_stance_brexit_5cross(wholeFile)
 
 else:
     training, validation, testing = loader.load_train_val_test()
