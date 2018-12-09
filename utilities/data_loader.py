@@ -18,6 +18,32 @@ from modules.CustomPreProcessor import CustomPreProcessor
 from modules.EmbeddingsExtractor import EmbeddingsExtractor
 
 tesssst = "afdsfdfeqe"
+def getmaxlength(file):
+    '''
+            :param file: file is a str, all the sentences, include cross info
+            :return:
+            '''
+    revs = []
+    X = []
+    y = []
+    X_train = []
+    X_test = []
+    y_train = []
+    y_test = []
+    max_length = 0
+    with open(file, "r") as f:
+        for line in f:
+            rev = []
+            rev.append(line.strip())
+            orig_rev = line.strip()
+            thisstance = int(line[0])
+            orig_rev = orig_rev[1:len(orig_rev)].strip()
+            pure_orig = orig_rev[0:len(orig_rev) - 4].strip()
+            oppinion = get_oppinion(orig_rev)
+            if max_length < len(pure_orig.split()):
+                max_length = len(pure_orig.split())
+            return max_length
+
 def prepare_dataset(X, y, pipeline, y_one_hot=True, y_as_is=False):
     try:
         print_dataset_statistics(y)
@@ -236,7 +262,7 @@ class Task4Loader1:
         print("\nPreparing test set...")
         testing = prepare_dataset(X_test, y_test, self.pipeline,
                                   self.y_one_hot)
-        return training, testing, max_length
+        return training, testing
 
     def load_stance_brexit(self,file_list):
         revs = []

@@ -12,7 +12,7 @@ from sklearn.metrics import recall_score
 
 from dataset.data_loader import SemEvalDataLoader
 from models.nn_models import build_attention_RNN,cnn_simple
-from utilities.data_loader import get_embeddings, Task4Loader1, prepare_dataset
+from utilities.data_loader import get_embeddings, Task4Loader1, prepare_dataset,getmaxlength
 
 numpy.random.seed(1337)  # for reproducibility
 
@@ -32,8 +32,9 @@ FINAL = True
 # If True, the SemEval gold labels will be used as the testing set
 # in order to perform Post-mortem analysis
 SEMEVAL_GOLD = False
+wholeFile = "../dataset/brexit/brexit5cross.txt"
 
-max_length = 30
+max_length = getmaxlength(wholeFile)
 TASK = "A"  # Specify the Subtask. It is needed to correctly load the data
 
 ############################################################################
@@ -59,8 +60,7 @@ if FINAL:
     print("\n > running in FINAL mode!\n")
     #training, testing = loader.load_final()
     data_folder = ["../dataset/brexit/BrexitOpposite.txt", "../dataset/brexit/BrexitNeutral.txt", "../dataset/brexit/BrexitSupport.txt"]
-    wholeFile = "../dataset/brexit/brexit5cross.txt"
-    training, testing ,max_length= loader.load_stance_brexit_5cross(wholeFile,0)
+    training, testing = loader.load_stance_brexit_5cross(wholeFile,0)
 
 else:
     training, validation, testing = loader.load_train_val_test()
