@@ -166,11 +166,12 @@ for cross_num in range(5):
 
 
     #history = nn_model.fit(training[0], training[1],validation_data=testing,epochs=1000, batch_size=50,class_weight=class_weights, callbacks=None)
-    history = nn_model.fit(training[0], training[1],validation_data=testing,epochs=150, batch_size=50, callbacks=None)
+    history = nn_model.fit(training[0], training[1],validation_data=testing,epochs=100, batch_size=50, callbacks=None)
     score = nn_model.evaluate(testing[0], testing[1], verbose = 0)
     print('Test score:', score[0])
     print('Test accuracy:', score[1])
-    f.write(score[0]  + " "  + score[1])
+    f.write(score[0])
+    f.write(score[1])
 
 f.close()
 pickle.dump(history.history,
