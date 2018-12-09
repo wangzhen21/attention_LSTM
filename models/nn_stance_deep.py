@@ -166,7 +166,11 @@ for cross_num in range(5):
 
 
     #history = nn_model.fit(training[0], training[1],validation_data=testing,epochs=1000, batch_size=50,class_weight=class_weights, callbacks=None)
+<<<<<<< HEAD
     history = nn_model.fit(training[0], training[1],validation_data=testing,epochs=80, batch_size=50)
+=======
+    history = nn_model.fit(training[0], training[1],validation_data=testing,epochs=20, batch_size=50)
+>>>>>>> 51a203369dbea3fd7626cfe5ef578b978bb013c1
     score = nn_model.evaluate(testing[0], testing[1], verbose = 0)
     print('Test score:', score[0])
     print('Test accuracy:', score[1])
