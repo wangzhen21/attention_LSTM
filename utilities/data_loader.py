@@ -42,7 +42,7 @@ def getmaxlength(file):
             oppinion = get_oppinion(orig_rev)
             if max_length < len(pure_orig.split()):
                 max_length = len(pure_orig.split())
-            return max_length
+    return max_length
 
 def prepare_dataset(X, y, pipeline, y_one_hot=True, y_as_is=False):
     try:
