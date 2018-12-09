@@ -101,7 +101,7 @@ def data_splits(dataset, final=False):
         return training, validation, test
 
 
-class Task4Loader:
+class Task4Loader1:
     """
     Task 4: Sentiment Analysis in Twitter
     """
