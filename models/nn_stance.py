@@ -12,7 +12,7 @@ from sklearn.metrics import recall_score
 
 from dataset.data_loader import SemEvalDataLoader
 from models.nn_models import build_attention_RNN,cnn_simple
-from utilities.data_loader import get_embeddings, Task4Loader, prepare_dataset
+from utilities.data_loader import get_embeddings, Task4Loader1, prepare_dataset
 
 numpy.random.seed(1337)  # for reproducibility
 
@@ -53,7 +53,7 @@ embeddings, word_indices = get_embeddings(corpus=WV_CORPUS, dim=WV_DIM)
 if PERSIST:
     pickle.dump(word_indices, open(best_model_word_indices(), 'wb'))
 
-loader = Task4Loader(word_indices, text_lengths=max_length, subtask=TASK)
+loader = Task4Loader1(word_indices, text_lengths=max_length, subtask=TASK)
 
 if FINAL:
     print("\n > running in FINAL mode!\n")

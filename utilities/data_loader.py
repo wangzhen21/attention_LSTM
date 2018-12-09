@@ -212,6 +212,7 @@ class Task4Loader1:
         X_test = []
         y_train = []
         y_test = []
+        max_length = 0
         with open(file, "r") as f:
             for line in f:
                 rev = []
@@ -227,14 +228,15 @@ class Task4Loader1:
                 else:
                     X_train.append(pure_orig)
                     y_train.append(oppinion)
-
+                if max_length < len(pure_orig.split()):
+                    max_length = len(pure_orig.split())
         print("\nPreparing training set...")
         training = prepare_dataset(X_train, y_train, self.pipeline,
                                    self.y_one_hot)
         print("\nPreparing test set...")
         testing = prepare_dataset(X_test, y_test, self.pipeline,
                                   self.y_one_hot)
-        return training, testing
+        return training, testing, max_length
 
     def load_stance_brexit(self,file_list):
         revs = []
@@ -244,6 +246,7 @@ class Task4Loader1:
         files = [neg_file, neu_file, pos_file]
         X = []
         y = []
+        max_length=0
         for i in range(len(files)):
             with open(files[i], "r") as f:
                 for line in f:

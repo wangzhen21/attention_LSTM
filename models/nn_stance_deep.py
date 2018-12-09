@@ -60,7 +60,7 @@ if FINAL:
     #training, testing = loader.load_final()
     data_folder = ["../dataset/brexit/BrexitOpposite.txt", "../dataset/brexit/BrexitNeutral.txt", "../dataset/brexit/BrexitSupport.txt"]
     wholeFile = "../dataset/brexit/brexit5cross.txt"
-    training, testing = loader.load_stance_brexit_5cross(wholeFile,0)
+    training, testing ,max_length= loader.load_stance_brexit_5cross(wholeFile,0)
 
 else:
     training, validation, testing = loader.load_train_val_test()
@@ -164,7 +164,7 @@ print("Class weights:",
       {cat_to_class_mapping[c]: w for c, w in class_weights.items()})
 
 #history = nn_model.fit(training[0], training[1],validation_data=testing,epochs=1000, batch_size=50,class_weight=class_weights, callbacks=None)
-history = nn_model.fit(training[0], training[1],validation_data=testing,epochs=1000, batch_size=50, callbacks=None)
+history = nn_model.fit(training[0], training[1],validation_data=testing,epochs=300, batch_size=50, callbacks=None)
 score = nn_model.evaluate(testing[0], testing[1], verbose = 0)
 print('Test score:', score[0])
 print('Test accuracy:', score[1])
