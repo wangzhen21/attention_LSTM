@@ -36,7 +36,7 @@ wholeFile = "../dataset/brexit/brexit5cross.txt"
 
 max_length = getmaxlength(wholeFile)
 TASK = "A"  # Specify the Subtask. It is needed to correctly load the data
-
+print("maxlength:" + max_length)
 ############################################################################
 # PERSISTENCE
 ############################################################################
