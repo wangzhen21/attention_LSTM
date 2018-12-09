@@ -170,7 +170,7 @@ for cross_num in range(5):
     score = nn_model.evaluate(testing[0], testing[1], verbose = 0)
     print('Test score:', score[0])
     print('Test accuracy:', score[1])
-    f.write(str(score[0]))
+    f.write(str(score[0]) + "\n")
     f.write(str(score[1]))
 
 f.close()
