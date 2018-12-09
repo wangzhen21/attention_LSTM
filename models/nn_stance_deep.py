@@ -150,10 +150,8 @@ class_weights = get_class_weights2(onehot_to_categories(training[1]),
 print("Class weights:",
       {cat_to_class_mapping[c]: w for c, w in class_weights.items()})
 
-history = nn_model.fit(training[0], training[1],
-                       validation_data=testing,
-                       epochs=1000, batch_size=50,
-                       class_weight=class_weights, callbacks=None)
+#history = nn_model.fit(training[0], training[1],validation_data=testing,epochs=1000, batch_size=50,class_weight=class_weights, callbacks=None)
+history = nn_model.fit(training[0], training[1],validation_data=testing,epochs=1000, batch_size=50, callbacks=None)
 score = nn_model.evaluate(testing[0], testing[1], verbose = 0)
 print('Test score:', score[0])
 print('Test accuracy:', score[1])
