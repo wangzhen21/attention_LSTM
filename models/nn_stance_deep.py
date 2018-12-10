@@ -34,7 +34,7 @@ FINAL = True
 SEMEVAL_GOLD = False
 wholeFile = "../dataset/brexit/brexit5cross.txt"
 f = open("accuracy_5cross.txt","w")
-for cross_num in range(5):
+for cross_num in range(10):
     max_length = getmaxlength(wholeFile)
     TASK = "A"  # Specify the Subtask. It is needed to correctly load the data
     print("maxlength:" + str(max_length))
