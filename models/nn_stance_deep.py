@@ -97,7 +97,7 @@ for cross_num in range(5):
     #                                clipnorm=1, lr=0.001, loss_l2=0.0001,)
 
     nn_model = build_attention_RNN(embeddings, classes=3, max_length=max_length,
-                                   unit=LSTM, layers=1, cells=150,
+                                   unit=LSTM, layers=2, cells=150,
                                    bidirectional=True,
                                    attention="simple",
                                    noise=0.3,
@@ -166,12 +166,11 @@ for cross_num in range(5):
 
 
     #history = nn_model.fit(training[0], training[1],validation_data=testing,epochs=1000, batch_size=50,class_weight=class_weights, callbacks=None)
-    history = nn_model.fit(training[0], training[1],validation_data=testing,epochs=80, batch_size=50)
+    history = nn_model.fit(training[0], training[1],validation_data=testing,epochs=100, batch_size=50)
     score = nn_model.evaluate(testing[0], testing[1], verbose = 0)
     print('Test score:', score[0])
     print('Test accuracy:', score[1])
-    f.write(str(score[0]) + "\n")
-    f.write(str(score[1]))
+    f.write(str(score[1]) + "\n")
 
 f.close()
 pickle.dump(history.history,
