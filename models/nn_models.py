@@ -65,7 +65,7 @@ def build_attention_RNN(embeddings, classes, max_length, unit=LSTM, cells=64,
 
     model = Sequential()
     model.add(embeddings_layer(max_length=max_length, embeddings=embeddings,
-                               trainable=False, masking=True, scale=False,
+                               trainable=True, masking=True, scale=False,
                                normalize=False))
 
     if noise > 0:
